@@ -127,8 +127,8 @@ body: SafeArea(
               currentint = index;
               // Navigator.push(context, MaterialPageRoute(builder: (context)=>pages[index]),);
                   switch(index){
-                    case 0: Navigator.push(context, MaterialPageRoute(builder:(context)=>search()));
-                    break;
+                    // case 0: Navigator.push(context, MaterialPageRoute(builder:(context)=>search()));
+                    // break;
                     case 1: Navigator.push(context, MaterialPageRoute(builder:(context)=>action()));
                     break;
                     case 2: Navigator.push(context, MaterialPageRoute(builder:(context)=>crime()));

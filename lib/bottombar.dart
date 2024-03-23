@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:ownapp/Comedy.dart';
 import 'package:ownapp/favourite.dart';
 import 'package:ownapp/homepage.dart';
 import 'package:ownapp/profile.dart';

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:ownapp/videofile.dart';
 
 class home_p extends StatefulWidget {
   const home_p({super.key});
@@ -150,7 +151,9 @@ List four = [
                   Padding(
                     padding: const EdgeInsets.only(left: 40),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>videoplay()));
+                      },
                       style: ElevatedButton.styleFrom(
                         side: BorderSide(color: Colors.white10),
                         shape: RoundedRectangleBorder(

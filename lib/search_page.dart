@@ -45,7 +45,7 @@ drama,
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      // backgroundColor: Colors.black,
 body: SafeArea(
   child: NestedScrollView(
     headerSliverBuilder: (BuildContext context,bool innerBoxIsscrolled)
@@ -148,11 +148,11 @@ body: SafeArea(
               width: 70,
               height: 10,
               decoration: BoxDecoration(
-                color: Colors.white10,
+                color:Theme.of(context).textTheme.bodyText1!.color,
                 borderRadius: BorderRadius.circular(10),
                   border: currentint ==index? Border.all(color: Colors.purple,width:2 ):null
               ),
-              child: Center(child: Text(txt[index],style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 12),)),
+              child: Center(child: Text(txt[index],style: TextStyle(color:Theme.of(context).backgroundColor,fontWeight: FontWeight.bold,fontSize: 12),)),
             ),
           ),
         );

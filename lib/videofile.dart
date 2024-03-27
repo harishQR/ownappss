@@ -15,7 +15,7 @@ class _videoplayState extends State<videoplay> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      // backgroundColor: Colors.black,
            body: Center(
              child: AspectRatio(
                aspectRatio: 16/9,

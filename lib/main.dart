@@ -1,9 +1,17 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ownapp/bottombar.dart';
 import 'package:ownapp/videofile.dart';
+import 'package:ownapp/visualmode.dart';
+import 'package:provider/provider.dart';
+import 'package:ownapp/visualmode.dart';
+import 'package:ownapp/favourite.dart';
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider<Themeprovider>(
+create:(_) => Themeprovider()..initialize() ,
+
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -12,12 +20,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-    MaterialApp(
+    Consumer<Themeprovider>(builder: (context,provider,child)
+    {
+      return
+        MaterialApp(
+          theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: provider.themeMode,
       debugShowCheckedModeBanner: false,
-      home: splash(),
-    );
+      home: splash(),);
+    });
   }
 }
+//hi
 
 class splash extends StatefulWidget {
   const splash({super.key});

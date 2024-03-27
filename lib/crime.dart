@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:ownapp/search_page.dart';
-
+import 'package:ownapp/visualmode.dart';
+import 'package:provider/provider.dart';
 import 'Comedy.dart';
 import 'action.dart';
 import 'drama.dart';
+import 'package:ownapp/visualmode.dart';
 class crime extends StatefulWidget {
   const crime({super.key});
 
@@ -33,6 +35,7 @@ class _crimeState extends State<crime> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Provider.of<Themeprovider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -44,7 +47,7 @@ class _crimeState extends State<crime> {
         ),
       ),
 
-      backgroundColor: Colors.black,
+      backgroundColor: theme.currentTheme.scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

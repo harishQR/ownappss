@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,8 +6,10 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:ownapp/visualmode.dart';
+import 'package:provider/provider.dart';
 class profile extends StatefulWidget {
   profile({Key? key, }) : super(key: key);
   String name = "Name";
@@ -19,8 +20,11 @@ class profile extends StatefulWidget {
 }
 class _profileState extends State<profile> {
   // final picker = ImagePicker();
-   String? img;
+  String? img;
   File? imageFile;
+  bool isSwitch = true;
+  ThemeData light = ThemeData(brightness: Brightness.light);
+  ThemeData dark = ThemeData(brightness: Brightness.dark);
 @override
 void initState(){
   super.initState();
@@ -47,7 +51,8 @@ void initState(){
       if (img!=null){
         imageFile = File(img!);
       }
-    });
+    }
+    );
   }
     TextEditingController controller1 = TextEditingController();
     TextEditingController controller2 = TextEditingController();
@@ -60,19 +65,14 @@ void initState(){
     List icons = [
       Icons.edit,
       Icons.history,
-      Icons.toggle_on
+      Icons.toggle_off,
       // Iconswitch(),
     ];
-// void Iconswitch(switch){
-//   Column(
-//   children: [
-//   ],
-//   );
-// }
+
     @override
     Widget build(BuildContext context) {
       return Scaffold(
-        backgroundColor: Colors.black,
+        // backgroundColor: Colors.black,
         body: SingleChildScrollView(
           child: SafeArea(
             child: Column(
@@ -84,7 +84,7 @@ void initState(){
                     height: 250,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.white10,
+                    color:   Theme.of(context).brightness == Brightness.dark ? Colors.white10 : Colors.purpleAccent,
                     ),
                     child: Column(
                       children: [
@@ -122,7 +122,7 @@ void initState(){
                                             children: <Widget>[
                                               ListTile(
                                                 leading: Icon(Icons.photo_library),
-                                                title: Text('Photo Library'),
+                                                title: Text('Photo Library',),
                                                 onTap: () {
                                                   getImage(ImageSource.gallery);
                                                   Navigator.of(context).pop();
@@ -157,7 +157,7 @@ void initState(){
                             Text(
                               widget.name,
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Theme.of(context).textTheme.bodyText1!.color ,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20),
                             ),
@@ -182,11 +182,11 @@ void initState(){
                               ),
                               Text(
                                 "Phno: ",
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
                               ),
                               Text(
                                 widget.phno,
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
                               ),
                             ],
                           ),
@@ -204,11 +204,11 @@ void initState(){
                               ),
                               Text(
                                 "Location: ",
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
                               ),
                               Text(
                                 widget.location,
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
                               ),
                             ],
                           ),
@@ -220,15 +220,6 @@ void initState(){
                 SizedBox(
                   height: 30,
                 ),
-                // Container(
-                //   // color: Colors.white10,
-                //   width: 300,
-                //   height: 80,
-                //   decoration: BoxDecoration(
-                //     color: Colors.white10,
-                //     borderRadius: BorderRadius.circular(10),
-                //   ),
-                // )
                 Container(
                   height: 280,
                   width: double.infinity,
@@ -237,7 +228,7 @@ void initState(){
                       return Padding(
                         padding: const EdgeInsets.all(3),
                         child: Card(
-                          color: Colors.white10,
+                        color:  Theme.of(context).brightness == Brightness.dark ? Colors.white10 : Colors.purpleAccent,
                           child: ListTile(
                             // onTap: (){},
                             leading: Text(
@@ -245,9 +236,26 @@ void initState(){
                               style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                  color: Theme.of(context).textTheme.bodyText1!.color),
                             ),
-                            trailing: GestureDetector(
+                            trailing:index == 2 ?
+                                Switch
+                                  (value: isSwitch ,
+                                    onChanged: (bool value){
+                                    setState(() {
+                                         isSwitch = value;
+                                       });
+                                    final themeprovider =
+                                    Provider.of<Themeprovider>(context, listen: false);
+                                    if (isSwitch) {
+                                      themeprovider.changeTheme('dark');
+                                    } else {
+                                      themeprovider.changeTheme('light');
+                                    }
+                                }
+                                )
+                                :
+                            GestureDetector(
                               onTap: () {
                                 switch (index) {
                                   case 0:
@@ -259,14 +267,6 @@ void initState(){
                                               backgroundColor: Colors.black,
                                               shadowColor: Colors.white,
                                               elevation: 5,
-                                              // elevation: 5,
-                                              // title: Column(
-                                              //   children: [
-                                              //     Text("Name:"),
-                                              //     Text("PhoneNo:"),
-                                              //     Text("Location:"),
-                                              //   ],
-                                              // ),
                                               content: Column(
                                                 children: [
                                                   TextFormField(
@@ -278,7 +278,7 @@ void initState(){
                                                     decoration: InputDecoration(
                                                       hintText: "Name",
                                                       hintStyle: TextStyle(
-                                                          color: Colors.white),
+                                                          color: Theme.of(context).textTheme.bodyText1!.color),
                                                     ),
                                                   ),
                                                   TextFormField(
@@ -290,7 +290,7 @@ void initState(){
                                                     decoration: InputDecoration(
                                                       hintText: "phoneNo",
                                                       hintStyle: TextStyle(
-                                                          color: Colors.white),
+                                                          color: Theme.of(context).textTheme.bodyText1!.color),
                                                     ),
                                                   ),
                                                   TextFormField(
@@ -302,7 +302,7 @@ void initState(){
                                                     decoration: InputDecoration(
                                                       hintText: "Location",
                                                       hintStyle: TextStyle(
-                                                          color: Colors.white),
+                                                          color: Theme.of(context).textTheme.bodyText1!.color),
                                                     ),
                                                   ),
                                                 ],
@@ -355,7 +355,7 @@ void initState(){
                               },
                               child: Icon(
                                 icons[index],
-                                color: Colors.white,
+                                color: Theme.of(context).textTheme.bodyText1!.color,
                                 size: index == 2 ? 50 : 30,
                               ),
                             ),

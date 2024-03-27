@@ -56,7 +56,7 @@ List four = [
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      // backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
@@ -176,7 +176,7 @@ List four = [
                           Text(
                             "WATCH NOW",
                             style: TextStyle(
-                                color: Colors.white,
+                               color:  Theme.of(context).textTheme.bodyText1!.color,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12),
                           ),
@@ -187,7 +187,7 @@ List four = [
                   SizedBox(width: 10,),
                   ElevatedButton(onPressed: (){
 
-                  }, child: Icon(Icons.add,color: Colors.white,),style: ElevatedButton.styleFrom(
+                  }, child: Icon(Icons.add,color:  Theme.of(context).textTheme.bodyText1!.color,),style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                       side: BorderSide(color: Colors.white10),
@@ -205,8 +205,8 @@ List four = [
                 position: currentpage.toInt(),
                 decorator: DotsDecorator(
                   size: Size(5, 5),
-                  color: Colors.grey,
-                  activeColor: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white:Colors.blue,
+                  activeColor: Theme.of(context).brightness == Brightness.dark?Colors.blue:Colors.black,
                 ),
               ),
               SizedBox(
@@ -221,7 +221,7 @@ List four = [
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                         color:  Theme.of(context).textTheme.bodyText1!.color),
                     ),
                   ),
                 ],
@@ -272,7 +272,7 @@ List four = [
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.white),
+                          color:  Theme.of(context).textTheme.bodyText1!.color),
                     ),
                   ),
                 ],
@@ -326,7 +326,7 @@ List four = [
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.white),
+                          color:  Theme.of(context).textTheme.bodyText1!.color),
                     ),
                   ),
                 ],
@@ -335,7 +335,7 @@ List four = [
                 width: double.infinity,
                 height: 90,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Theme.of(context).brightness == Brightness.dark? Colors.black:Colors.white10,
                   borderRadius: BorderRadius.circular(10),
                   // color: Colors.grey,
                 ),
@@ -379,7 +379,7 @@ List four = [
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.white),
+                          color:  Theme.of(context).textTheme.bodyText1!.color),
                     ),
                   ),
                 ],
